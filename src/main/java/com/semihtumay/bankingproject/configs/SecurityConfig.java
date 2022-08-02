@@ -35,7 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(getPermitAll()).permitAll()
                 .antMatchers(getUserRole()).hasRole("user")
                 .antMatchers(getAdminRole()).hasRole("admin")
-                .antMatchers(getCustomerAdmin_Role()).hasAnyRole("admin","customer")
                 .and()
                 .formLogin().disable()
                 .csrf().disable()
@@ -58,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private String[] getUserRole(){
-        String[] userRole={"/withdraw","/deposit"};
+        String[] userRole={"/withdraw","/deposit","/transfer"};
         return userRole;
     }
     private String[] getAdminRole(){
@@ -66,13 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return adminRole;
     }
 
-    private String[] getCustomerAdmin_Role(){
-        String[] bothRole={
-                "/category/list","/product/listbyCategory",
-                "/product/search","/product/list/company"};
-        return bothRole;
-
-    }
     private String[] getPermitAll(){
         String[] permitAll={"/admin/register",
                 "/user/application","/login"};
